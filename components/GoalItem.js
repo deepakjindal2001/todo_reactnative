@@ -16,7 +16,7 @@ const GoalItem = (props) => {
 
 const styles = StyleSheet.create({
   goalItem: {
-    marginBottom: 8,
+    margin: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
   },
