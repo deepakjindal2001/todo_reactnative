@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +18,7 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      { text: enteredGoalText, key: Math.random().toString() },
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
   };
   return (
@@ -31,13 +32,17 @@ export default function App() {
         <Button title="Add Goals" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          {courseGoals.map((goal, index) => (
-            <View style={styles.goalItem} key={index}>
-              <Text style={styles.goalText}>{goal}</Text>
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => (
+            <View style={styles.goalItem}>
+              <Text style={styles.goalText}>{itemData.item.text}</Text>
             </View>
-          ))}
-        </ScrollView>
+          )}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+        />
       </View>
     </View>
   );
